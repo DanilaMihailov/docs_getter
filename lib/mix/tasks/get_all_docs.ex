@@ -4,12 +4,11 @@ defmodule Mix.Tasks.Docs.Fetch do
   @shortdoc "Calls mix hex.docs fetch for all dependencies"
   def run(_opts) do
     project = Mix.Project.get()
-    deps = Keyword.get(project.project(), :deps)
+    deps = Path.wildcard("deps/*") |> Enum.map(fn p -> Path.split(p) |> Enum.at(1) end)
 
-    Enum.each(deps, fn dep ->
-      name = elem(dep, 0)
+    Enum.each(deps, fn name ->
       Mix.shell().info("Getting docs for #{name}")
-      Mix.Tasks.Hex.Docs.run(["fetch", Atom.to_string(name)])
+      Mix.Tasks.Hex.Docs.run(["fetch", name])
     end)
   end
 end
