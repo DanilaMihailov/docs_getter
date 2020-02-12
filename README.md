@@ -22,6 +22,14 @@ add this to `.gitignore`
 /doc_deps/
 ```
 
+you can add this to your `docs` config, so that you can call `mix docs` and not lose `Deps` links. (it is added automatically when you call `mix docs.build`)
+
+```elixir
+extras: [
+  "doc_deps/deps.md": [title: "Deps"]
+]
+```
+
 Now you can run 
 ```
 mix docs.build
