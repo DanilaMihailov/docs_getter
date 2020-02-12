@@ -25,7 +25,6 @@ defmodule DocsGetter.MixProject do
   defp docs do
     [
       extras: [
-        "deps.md",
         "README.md": [title: "README"]
       ]
     ]

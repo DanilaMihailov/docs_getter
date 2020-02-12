@@ -20,15 +20,6 @@ Build docs for all dependencies
 add this to `.gitignore`
 ```
 /doc_deps/
-deps.md
-```
-
-add this to your `docs` config
-
-```elixir
-extras: [
-  "deps.md"
-]
 ```
 
 Now you can run 

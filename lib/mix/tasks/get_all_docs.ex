@@ -19,6 +19,7 @@ defmodule Mix.Tasks.Docs.Build do
 
   @shortdoc "Builds docs for all dependencies"
   def run(_opts) do
+    project = Mix.Project.get()
     path = "../../doc_deps"
     all_deps = Path.wildcard("deps/*") |> Enum.map(fn p -> Path.split(p) |> Enum.at(1) end)
 
@@ -36,7 +37,9 @@ defmodule Mix.Tasks.Docs.Build do
     end)
 
     gen_deps_md(all_deps)
-    Mix.Tasks.Docs.run([])
+    cfg = project.project() |> add_extras()
+
+    Mix.Tasks.Docs.run([], cfg)
   end
 
 
@@ -47,6 +50,15 @@ defmodule Mix.Tasks.Docs.Build do
     |> Enum.reverse()
     |> Enum.join("\n")
 
-    File.write("deps.md", depsmd)
+    File.write("doc_deps/deps.md", depsmd)
+  end
+
+  defp add_extras(cfg) do
+    docs = cfg[:docs]
+    depsmd = ["doc_deps/deps.md": [title: "Deps"]]
+    extras = Keyword.get(docs, :extras, []) |> Keyword.merge(depsmd)
+    docs = Keyword.put(docs, :extras, extras)
+
+    Keyword.put(cfg, :docs, docs)
   end
 end
