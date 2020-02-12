@@ -26,7 +26,7 @@ you can add this to your `docs` config, so that you can call `mix docs` and not 
 
 ```elixir
 extras: [
-  "doc_deps/deps.md": [title: "Deps"]
+  "doc_deps/deps.md": [title: "Dependencies"]
 ]
 ```
 

@@ -19,6 +19,8 @@ defmodule DocsGetter.MixProject do
   defp deps do
     [
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      # test coverage (mix coveralls.html or mix test --cover)
+      {:excoveralls, "~> 0.12.1", only: :test, runtime: false}
     ]
   end
 
