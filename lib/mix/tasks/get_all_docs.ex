@@ -23,23 +23,31 @@ defmodule Mix.Tasks.Docs.Build do
     path = "../../doc_deps"
     all_deps = Path.wildcard("deps/*") |> Enum.map(fn p -> Path.split(p) |> Enum.at(1) end)
 
-    Enum.each(all_deps, fn name ->
+    build_deps_docs(all_deps, path)
+    gen_deps_md(all_deps)
+
+    cfg = project.project() |> add_extras()
+    Mix.Tasks.Docs.run([], cfg)
+  end
+
+  defp build_deps_docs(deps, path) do
+    deps
+    |> Enum.filter(fn dep ->
+      !File.exists?("doc_deps/#{dep}")
+    end)
+    |> Enum.each(fn name ->
+      dep_path = "#{path}/#{name}"
       Mix.shell().info("Getting docs for #{name}")
-      Mix.Project.in_project(String.to_atom(name), "deps/#{name}/", fn _module ->
+      Mix.Project.in_project(String.to_atom(name), "deps/#{name}/", fn _m ->
         # sometimes it raises exceptions, when no logo found
         try do
-          Mix.Tasks.Docs.run(["-o=#{path}/#{name}"])
+          Mix.Tasks.Docs.run(["-o=#{dep_path}"])
           Mix.Task.run("clean")
         rescue
           _ -> nil
         end
       end)
     end)
-
-    gen_deps_md(all_deps)
-    cfg = project.project() |> add_extras()
-
-    Mix.Tasks.Docs.run([], cfg)
   end
 
 
