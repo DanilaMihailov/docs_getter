@@ -17,22 +17,18 @@ Build docs for all dependencies
 
 # Usage
 
-add this to `.gitignore`
-```
-/doc_deps/
-```
-
-you can add this to your `docs` config, so that you can call `mix docs` and not lose `Deps` links. (it is added automatically when you call `mix docs.build`)
-
-```elixir
-extras: [
-  "doc_deps/deps.md": [title: "Dependencies"]
-]
-```
-
-Now you can run 
+Run
 ```
 mix docs.build
+```
+
+and after a while you will get your docs build with page `Dependencies`, that will list all your deps.
+
+![Docs with dependecies page](../priv/screenshot.png)
+
+you can add docs folder to `.gitignore`
+```
+/doc_deps/
 ```
 
 <!-- Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc) -->

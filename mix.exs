@@ -26,6 +26,8 @@ defmodule DocsGetter.MixProject do
 
   defp docs do
     [
+      api_reference: false,
+      main: "readme",
       extras: [
         "README.md": [title: "README"]
       ]
