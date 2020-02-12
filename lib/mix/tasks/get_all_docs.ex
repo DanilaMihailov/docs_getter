@@ -62,8 +62,8 @@ defmodule Mix.Tasks.Docs.Build do
     header = "## #{dep}"
     local_link = "[local docs](../doc_deps/#{dep}/index.html)"
     remote_link = "[hexdocs](https://hexdocs.pm/#{dep}/)"
-    ver = "#{obj.version}"
-    ["#{header}\n #{local_link} | #{remote_link} #{ver} \n\n #{desc}" | lines]
+    ver = "[#{obj.version}](https://hex.pm/packages/#{dep}/)"
+    ["#{header}\n #{local_link} | #{remote_link} | #{ver} \n\n #{desc}" | lines]
   end
 
   defp gen_deps_md(deps_objs, local_deps) do
