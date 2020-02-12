@@ -23,8 +23,7 @@ mix docs.build
 ```
 
 and after a while you will get your docs build with page `Dependencies`, that will list all your deps.
-
-![Docs with dependecies page](../priv/screenshot.png)
+![Docs with dependecies page](https://github.com/DanilaMihailov/docs_getter/blob/master/priv/screenshot.png?raw=true)
 
 you can add docs folder to `.gitignore`
 ```
