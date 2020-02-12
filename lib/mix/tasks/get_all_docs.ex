@@ -19,12 +19,12 @@ defmodule Mix.Tasks.Docs.Build do
 
   @shortdoc "Builds docs for all dependencies"
   def run(_opts) do
-    path = "../../doc/deps"
+    path = "../../doc_deps"
     all_deps = Path.wildcard("deps/*") |> Enum.map(fn p -> Path.split(p) |> Enum.at(1) end)
 
     Enum.each(all_deps, fn name ->
       Mix.shell().info("Getting docs for #{name}")
-      Mix.Project.in_project(String.to_atom(name), "deps/#{name}/", fn module ->
+      Mix.Project.in_project(String.to_atom(name), "deps/#{name}/", fn _module ->
         # sometimes it raises exceptions, when no logo found
         try do
           Mix.Tasks.Docs.run(["-o=#{path}/#{name}"])
@@ -34,5 +34,19 @@ defmodule Mix.Tasks.Docs.Build do
         end
       end)
     end)
+
+    gen_deps_md(all_deps)
+    Mix.Tasks.Docs.run([])
+  end
+
+
+  defp gen_deps_md(deps) do
+    depsmd = Enum.reduce(deps, ["", "# Deps"], fn dep, lines ->
+      ["* [#{dep}](../doc_deps/#{dep}/index.html)" | lines]
+    end)
+    |> Enum.reverse()
+    |> Enum.join("\n")
+
+    File.write("deps.md", depsmd)
   end
 end

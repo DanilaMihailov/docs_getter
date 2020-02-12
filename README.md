@@ -1,21 +1,42 @@
 # DocsGetter
 
-**TODO: Add description**
+Build docs for all dependencies
 
-## Installation
+<!-- ## Installation -->
+<!--  -->
+<!-- If [available in Hex](https://hex.pm/docs/publish), the package can be installed -->
+<!-- by adding `docs_getter` to your list of dependencies in `mix.exs`: -->
+<!--  -->
+<!-- ```elixir -->
+<!-- def deps do -->
+<!--   [ -->
+<!--     {:docs_getter, "~> 0.1.0"} -->
+<!--   ] -->
+<!-- end -->
+<!-- ``` -->
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `docs_getter` to your list of dependencies in `mix.exs`:
+# Usage
 
-```elixir
-def deps do
-  [
-    {:docs_getter, "~> 0.1.0"}
-  ]
-end
+add this to `.gitignore`
+```
+/doc_deps/
+deps.md
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/docs_getter](https://hexdocs.pm/docs_getter).
+add this to your `docs` config
 
+```elixir
+extras: [
+  "deps.md"
+]
+```
+
+Now you can run 
+```
+mix docs.build
+```
+
+<!-- Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc) -->
+<!-- and published on [HexDocs](https://hexdocs.pm). Once published, the docs can -->
+<!-- be found at [https://hexdocs.pm/docs_getter](https://hexdocs.pm/docs_getter). -->
+<!--  -->
