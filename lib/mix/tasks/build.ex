@@ -3,6 +3,13 @@ defmodule Mix.Tasks.Docs.Build do
 
   @moduledoc """
   Builds docs for all dependencies
+
+  Places docs in `doc_deps/` folder and adds deps.md to extras in docs config. 
+  So extra page will appear in docs, where list of dependencies will be listed.
+  List is separated in your dependencies and deps of deps.
+
+  If you call `mix docs`, after `mix docs.build` it will override extras and you will not see
+  deps page. You can run `mix docs.build` instead and get same result.
   """
   @shortdoc "Builds docs for all dependencies"
   @doc false
