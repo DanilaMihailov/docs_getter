@@ -5,10 +5,14 @@ defmodule DocsGetter.MixProject do
     [
       app: :docs_getter,
       version: "0.1.0-beta.1",
+      source_url: "https://github.com/DanilaMihailov/docs_getter",
+      homepage_url: "https://github.com/DanilaMihailov/docs_getter",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      docs: docs()
+      docs: docs(),
+      description: description(),
+      package: package()
     ]
   end
 
@@ -16,11 +20,20 @@ defmodule DocsGetter.MixProject do
     []
   end
 
+  defp description() do
+    "Builds docs for all dependencies"
+  end
+
+  defp package() do
+    [
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/DanilaMihailov/docs_getter"}
+    ]
+  end
+
   defp deps do
     [
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
-      # test coverage (mix coveralls.html or mix test --cover)
-      {:excoveralls, "~> 0.12.1", only: :test, runtime: false}
     ]
   end
 
