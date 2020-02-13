@@ -1,5 +1,6 @@
 defmodule Mix.Tasks.Docs.Fetch do
   use Mix.Task
+
   @moduledoc """
   Calls mix hex.docs fetch for all dependencies
 

@@ -31,6 +31,7 @@ defmodule Mix.Tasks.Docs.Build do
     |> Enum.reduce([], fn name, acc ->
       dep_path = "#{path}/#{name}"
       Mix.shell().info("Getting docs for #{name}")
+
       Mix.Project.in_project(String.to_atom(name), "deps/#{name}/", fn m ->
         unless File.exists?(dep_path) do
           # sometimes it raises exceptions, when no logo found
@@ -44,7 +45,11 @@ defmodule Mix.Tasks.Docs.Build do
 
         if m do
           proj = m.project()
-          Keyword.put_new(acc, proj[:app], %{version: proj[:version], description: proj[:description]})
+
+          Keyword.put_new(acc, proj[:app], %{
+            version: proj[:version],
+            description: proj[:description]
+          })
         else
           acc
         end
@@ -62,9 +67,9 @@ defmodule Mix.Tasks.Docs.Build do
   end
 
   defp gen_deps_md(deps_objs, local_deps) do
-    prepared_deps = 
+    prepared_deps =
       deps_objs
-      |> Enum.map(fn {name, obj} -> 
+      |> Enum.map(fn {name, obj} ->
         if Keyword.has_key?(local_deps, name) do
           {name, Map.put(obj, :level, 1)}
         else
@@ -79,7 +84,6 @@ defmodule Mix.Tasks.Docs.Build do
       |> Enum.reduce(["", "# Dependencies"], &get_dep_line/2)
       |> Enum.reverse()
       |> Enum.join("\n")
-
 
     deps_of_deps_md =
       prepared_deps
