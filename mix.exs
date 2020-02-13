@@ -33,7 +33,7 @@ defmodule DocsGetter.MixProject do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
 

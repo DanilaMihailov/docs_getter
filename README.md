@@ -10,7 +10,7 @@ by adding `docs_getter` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:docs_getter, "~> 0.1"}
+    {:docs_getter, "~> 0.1-pre", only: :dev, runtime: false}
   ]
 end
 ```
